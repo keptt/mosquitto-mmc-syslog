@@ -1,0 +1,16 @@
+*.bak*
+Dockerfile.*
+mosquitto.db
+stream/*
+google-bridge/*
+iv-certs
+srt-*
+tokens.json
+users.json
+db.json
+config.json
+clusters.json
+settings.json
+license.lic
+_*
+rsyslog/*

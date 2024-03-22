@@ -1,0 +1,339 @@
+[
+    {
+        "logger": "syslog",
+        "options": {
+            "protocol": "unix",
+            "path": "/dev/log"
+        },
+        "disable": false,
+        "logThreshold": "debug",
+        "defaultLoglevel": "info",
+        "filters": [
+            {
+                "filterType": "include"
+            }
+        ],
+        "operations": [
+            {
+                "source": "application-tokens",
+                "operation": "createAppToken",
+                "loglevel": "notice"
+            },
+            {
+                "source": "application-tokens",
+                "operation": "deleteAppToken",
+                "loglevel": "notice"
+            },
+            {
+                "source": "application-tokens",
+                "operation": "getAppToken",
+                "loglevel": "debug"
+            },
+            {
+                "source": "application-tokens",
+                "operation": "getAppTokens",
+                "loglevel": "debug"
+            },
+            {
+                "source": "cert-management",
+                "operation": "addCert",
+                "loglevel": "notice"
+            },
+            {
+                "source": "cert-management",
+                "operation": "deleteCert",
+                "loglevel": "notice"
+            },
+            {
+                "source": "cert-management",
+                "operation": "deployCert",
+                "loglevel": "info"
+            },
+            {
+                "source": "cert-management",
+                "operation": "getCerts",
+                "loglevel": "debug"
+            },
+            {
+                "source": "cert-management",
+                "operation": "getCertInfo",
+                "loglevel": "debug"
+            },
+            {
+                "source": "cert-management",
+                "operation": "getListeners",
+                "loglevel": "debug"
+            },
+            {
+                "source": "cert-management",
+                "operation": "updateCert",
+                "loglevel": "info"
+            },
+            {
+                "source": "cluster-management",
+                "operation": "checkClusterHealthStatus",
+                "loglevel": "notice"
+            },
+            {
+                "source": "cluster-management",
+                "operation": "createCluster",
+                "loglevel": "notice"
+            },
+            {
+                "source": "cluster-management",
+                "operation": "deleteAllClusters",
+                "loglevel": "notice"
+            },
+            {
+                "source": "cluster-management",
+                "operation": "deleteCluster",
+                "loglevel": "notice"
+            },
+            {
+                "source": "cluster-management",
+                "operation": "getCluster",
+                "loglevel": "debug"
+            },
+            {
+                "source": "cluster-management",
+                "operation": "getClusters",
+                "loglevel": "debug"
+            },
+            {
+                "source": "cluster-management",
+                "operation": "getClusterStatuses",
+                "loglevel": "debug"
+            },
+            {
+                "source": "cluster-management",
+                "operation": "joinCluster",
+                "loglevel": "notice"
+            },
+            {
+                "source": "cluster-management",
+                "operation": "leaveCluster",
+                "loglevel": "notice"
+            },
+            {
+                "source": "cluster-management",
+                "operation": "modifyCluster",
+                "loglevel": "notice"
+            },
+            {
+                "source": "connect-disconnect",
+                "operation": "connectServerToBroker",
+                "loglevel": "info"
+            },
+            {
+                "source": "connect-disconnect",
+                "operation": "disconnectServerFromBroker",
+                "loglevel": "info"
+            },
+            {
+                "source": "connections-rest-api",
+                "operation": "createConnection",
+                "loglevel": "notice"
+            },
+            {
+                "source": "connections-rest-api",
+                "operation": "deleteConnection",
+                "loglevel": "notice"
+            },
+            {
+                "source": "connections-rest-api",
+                "operation": "getConnection",
+                "loglevel": "debug"
+            },
+            {
+                "source": "connections-rest-api",
+                "operation": "getConnections",
+                "loglevel": "debug"
+            },
+            {
+                "source": "dynamic-security-rest-api",
+                "operation": "executeCommand",
+                "loglevel": "debug"
+            },
+            {
+                "source": "dynamic-security-rest-api",
+                "operation": "getBrokerInformation",
+                "loglevel": "debug"
+            },
+            {
+                "source": "core",
+                "operation": "connectToBroker",
+                "loglevel": "info"
+            },
+            {
+                "source": "core",
+                "operation": "createConnection",
+                "loglevel": "notice"
+            },
+            {
+                "source": "core",
+                "operation": "deleteConnection",
+                "loglevel": "notice"
+            },
+            {
+                "source": "core",
+                "operation": "disconnectFromBroker",
+                "loglevel": "info"
+            },
+            {
+                "source": "core",
+                "operation": "getBrokerConnections",
+                "loglevel": "info"
+            },
+            {
+                "source": "core",
+                "operation": "getConfiguration",
+                "loglevel": "debug"
+            },
+            {
+                "source": "core",
+                "operation": "getPlugins",
+                "loglevel": "debug"
+            },
+            {
+                "source": "core",
+                "operation": "loadPlugin",
+                "loglevel": "notice"
+            },
+            {
+                "source": "core",
+                "operation": "modifyConnection",
+                "loglevel": "info"
+            },
+            {
+                "source": "core",
+                "operation": "shutdown",
+                "loglevel": "info"
+            },
+            {
+                "source": "core",
+                "operation": "startup",
+                "loglevel": "info"
+            },
+            {
+                "source": "core",
+                "operation": "unloadPlugin",
+                "loglevel": "notice"
+            },
+            {
+                "source": "core",
+                "operation": "updateSettings",
+                "loglevel": "info"
+            },
+            {
+                "source": "monitoring-rest-api",
+                "operation": "getBroker",
+                "loglevel": "debug"
+            },
+            {
+                "source": "monitoring-rest-api",
+                "operation": "getBrokers",
+                "loglevel": "debug"
+            },
+            {
+                "source": "monitoring-rest-api",
+                "operation": "getCluster",
+                "loglevel": "debug"
+            },
+            {
+                "source": "monitoring-rest-api",
+                "operation": "getClusters",
+                "loglevel": "debug"
+            },
+            {
+                "source": "system-status-rest-api",
+                "operation": "getSystemStatus",
+                "loglevel": "debug"
+            },
+            {
+                "source": "topictree-rest-api",
+                "operation": "deleteTopicTree",
+                "loglevel": "notice"
+            },
+            {
+                "source": "topictree-rest-api",
+                "operation": "getTopicTree",
+                "loglevel": "debug"
+            },
+            {
+                "source": "core",
+                "operation": "login",
+                "loglevel": "info"
+            },
+            {
+                "source": "core",
+                "operation": "logout",
+                "loglevel": "info"
+            },
+            {
+                "source": "user-management",
+                "operation": "createGroup",
+                "loglevel": "notice"
+            },
+            {
+                "source": "user-management",
+                "operation": "createUser",
+                "loglevel": "notice"
+            },
+            {
+                "source": "user-management",
+                "operation": "deleteGroup",
+                "loglevel": "notice"
+            },
+            {
+                "source": "user-management",
+                "operation": "deleteUser",
+                "loglevel": "notice"
+            },
+            {
+                "source": "user-management",
+                "operation": "getGroup",
+                "loglevel": "debug"
+            },
+            {
+                "source": "user-management",
+                "operation": "getGroups",
+                "loglevel": "debug"
+            },
+            {
+                "source": "user-management",
+                "operation": "getRoles",
+                "loglevel": "debug"
+            },
+            {
+                "source": "user-management",
+                "operation": "getUser",
+                "loglevel": "debug"
+            },
+            {
+                "source": "user-management",
+                "operation": "getUserGroups",
+                "loglevel": "debug"
+            },
+            {
+                "source": "user-management",
+                "operation": "getUsers",
+                "loglevel": "debug"
+            },
+            {
+                "source": "user-management",
+                "operation": "updateGroup",
+                "loglevel": "info"
+            },
+            {
+                "source": "user-management",
+                "operation": "updateProfile",
+                "loglevel": "info"
+            },
+            {
+                "source": "user-management",
+                "operation": "updateUser",
+                "loglevel": "info"
+            }
+        ]
+    }
+]

@@ -1,0 +1,223 @@
+{
+	"defaultACLAccess":	{
+		"publishClientSend":	false,
+		"publishClientReceive":	true,
+		"subscribe":	false,
+		"unsubscribe":	true
+	},
+	"clients":	[{
+			"username":	"admin",
+			"textname":	"Admin user",
+			"roles":	[{
+					"rolename":	"super-admin"
+				}, {
+					"rolename":	"sys-observe"
+				}, {
+					"rolename":	"topic-observe"
+				}],
+			"password":	"X3sHNtsp2KBTgJmQFprL3Ir3tlwyGzB/q8gZThryTZnIiHPkMV3mxM71yAvPLBe1hb7FJzcSdpoxXKjMPyupqg==",
+			"salt":	"t0K5tFlXwuaqGkHJ46wqxub5FQ+amCmP1TzYJ8JZVGHrNgybXC7Mxam8xmmzk0igMBsoOmkq3rluK5hNcGWBKg==",
+			"iterations":	10000
+		}, {
+			"username":	"cedalo",
+			"clientid":	"cedalo",
+			"textname":	"cedalo",
+			"textdescription":	"cedalo",
+			"roles":	[{
+					"rolename":	"client"
+				}, {
+					"rolename":	"topic-observe"
+				}],
+			"password":	"G8z0mDg7Ds7BasTItpN3kPZ32176m4gDzOC3w2TKu6pgEIgJLTNRyohqh/BTltXw+KoVDFG+7XzhILQ7F5hB4A==",
+			"salt":	"UggHjVR4TLYKuN6ELhCI3I8/NEp5MOJCZzZUfcwrK5+q1Xr8A5Z4gg4YoBD3T/l6px/WJk+78NDHvcIpK/Pvfw==",
+			"iterations":	101
+		}, {
+			"username":	"test",
+			"clientid":	"test",
+			"textname":	"tset",
+			"textdescription":	"test",
+			"roles":	[],
+			"password":	"9XwCxcpCj8Ga7RigVxrJLjs/Iw6hAaRQnuEc8FVGtIAEbcWNxS9dw16/cig1f6nbPd6l/xRb0QnmIyt6VIHB0g==",
+			"salt":	"5H+6brzMZooR1lypGCVE3Y2mmOTdd3wezqicVHqTx5olFOFN3y3Lj6uOHsWDaz0jClSk4tid3bN/F/Y7TbJy2Q==",
+			"iterations":	101
+		}],
+	"groups":	[{
+			"groupname":	"unauthenticated",
+			"textname":	"Unauthenticated group",
+			"textdescription":	"If unauthenticated access is allowed, this group can be used to define roles for clients that connect without a password.",
+			"roles":	[],
+			"clients":	[]
+		}],
+	"anonymousGroup":	"unauthenticated",
+	"roles":	[{
+			"rolename":	"broker-admin",
+			"textdescription":	"Grants access to administer general broker configuration.",
+			"allowwildcardsubs":	true,
+			"acls":	[{
+					"acltype":	"publishClientSend",
+					"topic":	"$CONTROL/broker/#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"publishClientReceive",
+					"topic":	"$CONTROL/broker/#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"subscribePattern",
+					"topic":	"$CONTROL/broker/#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"unsubscribePattern",
+					"topic":	"$CONTROL/broker/#",
+					"priority":	0,
+					"allow":	true
+				}]
+		}, {
+			"rolename":	"client",
+			"textdescription":	"Read/write access to the full application topic hierarchy.",
+			"allowwildcardsubs":	true,
+			"acls":	[{
+					"acltype":	"publishClientSend",
+					"topic":	"#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"publishClientReceive",
+					"topic":	"#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"subscribePattern",
+					"topic":	"#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"unsubscribePattern",
+					"topic":	"#",
+					"priority":	0,
+					"allow":	true
+				}]
+		}, {
+			"rolename":	"dynsec-admin",
+			"textdescription":	"Grants access to administer clients/groups/roles.",
+			"allowwildcardsubs":	true,
+			"acls":	[{
+					"acltype":	"publishClientSend",
+					"topic":	"$CONTROL/dynamic-security/#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"publishClientReceive",
+					"topic":	"$CONTROL/dynamic-security/#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"subscribePattern",
+					"topic":	"$CONTROL/dynamic-security/#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"unsubscribePattern",
+					"topic":	"$CONTROL/dynamic-security/#",
+					"priority":	0,
+					"allow":	true
+				}]
+		}, {
+			"rolename":	"inspect-admin",
+			"textdescription":	"Grants access to administer inspect data.",
+			"allowwildcardsubs":	true,
+			"acls":	[{
+					"acltype":	"publishClientSend",
+					"topic":	"$CONTROL/cedalo/inspect/#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"publishClientReceive",
+					"topic":	"$CONTROL/cedalo/inspect/#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"subscribePattern",
+					"topic":	"$CONTROL/cedalo/inspect/#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"unsubscribePattern",
+					"topic":	"$CONTROL/cedalo/inspect/#",
+					"priority":	0,
+					"allow":	true
+				}]
+		}, {
+			"rolename":	"super-admin",
+			"textdescription":	"Grants access to administer all kind of broker controls",
+			"allowwildcardsubs":	true,
+			"acls":	[{
+					"acltype":	"publishClientSend",
+					"topic":	"$CONTROL/#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"publishClientReceive",
+					"topic":	"$CONTROL/#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"subscribePattern",
+					"topic":	"$CONTROL/#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"unsubscribePattern",
+					"topic":	"$CONTROL/#",
+					"priority":	0,
+					"allow":	true
+				}]
+		}, {
+			"rolename":	"sys-notify",
+			"textdescription":	"Allow bridges to publish connection state messages.",
+			"allowwildcardsubs":	true,
+			"acls":	[{
+					"acltype":	"publishClientSend",
+					"topic":	"$SYS/broker/connection/%c/state",
+					"priority":	0,
+					"allow":	true
+				}]
+		}, {
+			"rolename":	"sys-observe",
+			"textdescription":	"Observe the $SYS topic hierarchy.",
+			"allowwildcardsubs":	true,
+			"acls":	[{
+					"acltype":	"publishClientReceive",
+					"topic":	"$SYS/#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"subscribePattern",
+					"topic":	"$SYS/#",
+					"priority":	0,
+					"allow":	true
+				}]
+		}, {
+			"rolename":	"topic-observe",
+			"textdescription":	"Read only access to the full application topic hierarchy.",
+			"allowwildcardsubs":	true,
+			"acls":	[{
+					"acltype":	"publishClientReceive",
+					"topic":	"#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"subscribePattern",
+					"topic":	"#",
+					"priority":	0,
+					"allow":	true
+				}, {
+					"acltype":	"unsubscribePattern",
+					"topic":	"#",
+					"priority":	0,
+					"allow":	true
+				}]
+		}]
+}

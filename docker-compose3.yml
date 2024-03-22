@@ -1,0 +1,98 @@
+version: '3.7'
+
+services:
+    rsyslog:
+        image: ubuntu:latest
+        container_name: rsyslog
+        volumes:
+          - /tmp/syslogdev:/tmp/dev
+        command:
+            - /bin/sh
+            - -c
+            - |
+                rm -f /tmp/dev/log &&
+                apt-get update -q && apt-get install -y rsyslog &&
+                sed -i '/imklog/s/^/#/' /etc/rsyslog.conf &&
+                sed -i '/module(load="imuxsock")\s*\(.*\)$$/a input(type="imuxsock" Socket="/tmp/dev/log" CreatePath="on")' /etc/rsyslog.conf &&
+                rsyslogd -n
+
+    mosquitto:
+        image: registry.cedalo.com/development/mosquitto:2.7.0
+        container_name: mosquitto
+        ports:
+            - 127.0.0.1:1888:1883
+            - 8888:8883
+            - 8090:8090
+        volumes:
+            - ./mosquitto/config:/mosquitto/config
+            - ./mosquitto/data:/mosquitto/data
+            - ./management-center/config:/mosquitto/license
+            - /tmp/syslogdev:/tmp/syslogdev
+        environment:
+            CEDALO_LICENSE_FILE: /mosquitto/license/license.lic
+        restart: unless-stopped
+        entrypoint: >
+            /bin/sh -c "
+                while ! test -S /tmp/syslogdev/log;
+                do
+                    echo 'Waiting for rsyslog container';
+                    sleep 1;
+                done;
+                rm -f /dev/log;
+                ln -s /tmp/syslogdev/log /dev/log;
+                /docker-entrypoint.sh /usr/sbin/mosquitto -c /mosquitto/config/mosquitto.conf
+            "
+
+        depends_on:
+            - rsyslog
+
+    management-center:
+        image: registry.cedalo.com/development/management-center-premium:2.7_with_base_path
+        container_name: management-center
+        environment:
+            CEDALO_HOST_NAME: ${CEDALO_HOST_NAME}
+            CEDALO_HOST_IP: ${CEDALO_HOST_IP}
+            CEDALO_MC_USERNAME: cedalo
+            CEDALO_MC_PASSWORD: "tests"
+            CEDALO_MC_BROKER_NAME: development-inspect
+            CEDALO_MC_BROKER_URL: mqtt://mosquitto:1883
+            CEDALO_MC_BROKER_USERNAME: inspect-admin
+            CEDALO_MC_BROKER_PASSWORD: inspect-admin-tests
+            CEDALO_MC_BROKER_SERVICE_NAME:  mosquitto
+            CEDALO_MC_PROXY_CONFIG: /management-center/config/config.json
+            CEDALO_MC_LICENSE_PATH: /management-center/config/license.lic
+            CEDALO_MC_PROXY_CONFIG_CERTS: /management-center/config/certs.db
+            CEDALO_MC_PROXY_CONFIG_USERS: /management-center/config/users.json
+            CEDALO_MC_PROXY_CONFIG_TOKENS: /management-center/config/tokens.json
+            CEDALO_MC_PROXY_CONFIG_CLUSTERS: /management-center/config/clusters.json
+            CEDALO_MC_PROXY_CONFIG_AUDIT_TRAIL: /management-center/config/audit.json
+            CEDALO_MC_PROXY_SRT_BASE: /management-center/config
+            CEDALO_MC_PLUGIN_LIST_PATH: /management-center/config/plugins.json
+            CEDALO_MC_DATA_DIRECTORY_PATH: /management-center/config
+            CEDALO_MC_BROKER_SUPPORTS_RESTART: "true"
+            CEDALO_MC_SHOW_FEEDBACK_FORM: "true"
+            CEDALO_MC_MQTT_CONNECT_INITIAL_BACKOFF_INTERVAL_MS: "10000"
+        ports:
+            - 127.0.0.1:8089:8088
+        volumes:
+            - ./management-center/config:/management-center/config
+            - ./management-center/data:/data/
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /tmp/syslogdev:/tmp/syslogdev
+        command: >
+            /bin/sh -c "
+                while ! nc -z mosquitto 1883;
+                do
+                    echo 'Waiting for mosquitto';
+                    sleep 1;
+                done;
+                while ! test -S /tmp/syslogdev/log;
+                do
+                    echo 'Waiting for rsyslog container';
+                    sleep 1;
+                done;
+                rm -f /dev/log;
+                ln -s /tmp/syslogdev/log /dev/log;
+                /management-center/mmc
+            "
+        restart: unless-stopped
