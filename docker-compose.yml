@@ -22,7 +22,7 @@ services:
             retries: 10
 
     mosquitto:
-        image: registry.cedalo.com/development/mosquitto:2.7.0
+        image: registry.cedalo.com/mosquitto/mosquitto:2.7
         container_name: mosquitto
         ports:
             - 127.0.0.1:1888:1883
@@ -41,7 +41,7 @@ services:
                 condition: service_healthy
 
     management-center:
-        image: registry.cedalo.com/development/management-center-premium:2.7_with_base_path
+        image: registry.cedalo.com/mosquitto/management-center:2.7
         container_name: management-center
         environment:
             CEDALO_HOST_NAME: ${CEDALO_HOST_NAME}
